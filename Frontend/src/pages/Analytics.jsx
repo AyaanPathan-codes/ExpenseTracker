@@ -25,18 +25,18 @@ function Analytics() {
 
   // ✅ FIXED TOGGLE
   const toggleTheme = () => {
-    const isDark = document.documentElement.classList.contains("dark");
+  const root = document.documentElement;
 
-    if (isDark) {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-      setDark(false);
-    } else {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-      setDark(true);
-    }
-  };
+  if (root.classList.contains("dark")) {
+    root.classList.remove("dark");
+    localStorage.setItem("theme", "light");
+    setDark(false);
+  } else {
+    root.classList.add("dark");
+    localStorage.setItem("theme", "dark");
+    setDark(true);
+  }
+};
 
   // 🔥 STATS
   const total = expenses.reduce((s, e) => s + (e.amount || 0), 0);
@@ -61,10 +61,9 @@ function Analytics() {
   const COLORS = ["#6366f1", "#22c55e", "#f59e0b", "#ef4444"];
 
   return (
-    <div className="flex min-h-screen bg-[#f5f6fa] dark:bg-[#0f172a] transition-all">
-
+   <div className="flex min-h-screen bg-[#f5f6fa] dark:bg-[#0f172a] text-gray-900 dark:text-white">
       {/* 🔥 SIDEBAR */}
-      <div className="w-64 bg-white dark:bg-[#111827] p-6 shadow-lg">
+     <div className="w-64 bg-white dark:bg-[#020617] p-6 shadow-xl border-r border-gray-200 dark:border-gray-800">
         <h2 className="text-xl font-bold mb-6 text-gray-800 dark:text-white">
           Business
         </h2>
@@ -88,18 +87,32 @@ function Analytics() {
       <div className="flex-1 p-6 space-y-6">
 
         {/* 🔥 TOP BAR */}
-        <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-semibold text-gray-800 dark:text-white">
-            Analytics
-          </h1>
+        <div className="flex justify-between items-center mb-6">
 
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-full bg-gray-200 dark:bg-gray-700"
-          >
-            {dark ? <Sun /> : <Moon />}
-          </button>
-        </div>
+  <h1 className="text-2xl font-semibold">
+    Analytics
+  </h1>
+
+  <div className="flex items-center gap-4">
+
+    {/* 🔥 ADD BUTTON */}
+    <button
+      onClick={() => window.location.href = "/add"}
+      className="bg-[#6366f1] hover:bg-indigo-600 text-white px-4 py-2 rounded-lg"
+    >
+      + Add Expense
+    </button>
+
+    {/* 🔥 DARK TOGGLE */}
+    <button
+      onClick={toggleTheme}
+      className="p-2 rounded-full bg-gray-200 dark:bg-[#1e293b]"
+    >
+      {dark ? <Sun /> : <Moon />}
+    </button>
+
+  </div>
+</div>
 
         {/* 🔥 STATS */}
         <div className="grid grid-cols-4 gap-5">
@@ -136,7 +149,7 @@ function Analytics() {
         <div className="grid grid-cols-2 gap-6">
 
           {/* BAR */}
-          <div className="bg-white dark:bg-[#1e293b] p-6 rounded-2xl shadow-sm">
+          <div className="bg-white dark:bg-[#1e293b] p-6 rounded-2xl border border-gray-200 dark:border-gray-800">
             <h3 className="mb-4 text-gray-700 dark:text-white">
               Sales Dynamics
             </h3>
