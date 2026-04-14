@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useNavigate } from "react";
 import { getExpenses } from "../services/api";
 import BalancedCard from "../components/BalancedCard";
 import TransactionItem from "../components/TransactionItem";
@@ -6,9 +6,9 @@ import BottomNav from "../components/BottomNav";
 
 function Dashboard() {
   const [expenses, setExpenses] = useState([]);
-
+    const navigate = useNavigate();
   useEffect(() => {
-    getExpenses().then(res => setExpenses(res.data));
+    getExpenses().then((res) => setExpenses(res.data));
   }, []);
 
   // 🔥 total balance
@@ -16,11 +16,16 @@ function Dashboard() {
 
   return (
     <div className="p-4 pb-20 bg-gray-100 min-h-screen space-y-6">
-
       {/* 🔥 HEADER */}
       <div>
         <h2 className="text-lg text-gray-500">Hello,</h2>
         <h1 className="text-2xl font-bold">Ayaan 👋</h1>
+        <button
+          className="bg-purple-500 text-white px-4 py-2 rounded"
+          onClick={() => navigate("/add")}
+        >
+          + Add Expense
+        </button>
       </div>
 
       {/* 🔥 BALANCE */}
@@ -35,10 +40,14 @@ function Dashboard() {
 
         <div className="flex gap-3 overflow-x-auto">
           <div className="bg-purple-500 text-white p-4 rounded-xl min-w-[150px]">
-            Netflix<br />₹500/month
+            Netflix
+            <br />
+            ₹500/month
           </div>
           <div className="bg-white p-4 rounded-xl min-w-[150px] shadow">
-            Spotify<br />₹199/month
+            Spotify
+            <br />
+            ₹199/month
           </div>
         </div>
       </div>
@@ -50,7 +59,7 @@ function Dashboard() {
         </div>
 
         <div className="space-y-3">
-          {expenses.map(e => (
+          {expenses.map((e) => (
             <TransactionItem key={e.uid} item={e} />
           ))}
         </div>

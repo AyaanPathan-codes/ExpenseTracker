@@ -3,13 +3,14 @@ import { addExpense } from "../services/api";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
+import { CATEGORIES } from "../components/constants/Category";
 
 function AddExpense() {
   const [form, setForm] = useState({
     amount: "",
     description: "",
     category: "",
-    date: ""
+    date: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -53,9 +54,8 @@ function AddExpense() {
         amount: "",
         description: "",
         category: "",
-        date: ""
+        date: "",
       });
-
     } catch (err) {
       console.error(err);
       alert("Error adding expense");
@@ -66,16 +66,12 @@ function AddExpense() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex justify-center items-center p-4">
-
       <Card className="w-full max-w-md shadow-lg">
         <CardContent className="p-6 space-y-4">
-
           {/* 🔥 Heading */}
           <div>
             <h2 className="text-xl font-bold">Add Expense</h2>
-            <p className="text-gray-500 text-sm">
-              Track your daily spending
-            </p>
+            <p className="text-gray-500 text-sm">Track your daily spending</p>
           </div>
 
           {/* 🔥 Amount */}
@@ -96,12 +92,20 @@ function AddExpense() {
           />
 
           {/* 🔥 Category */}
-          <Input
+          <select
             name="category"
-            placeholder="Category (Food, Shopping...)"
             value={form.category}
             onChange={handleChange}
-          />
+            className="w-full border p-2 rounded"
+          >
+            <option value="">Select Category</option>
+
+            {CATEGORIES.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
 
           {/* 🔥 Date */}
           <Input
@@ -112,17 +116,11 @@ function AddExpense() {
           />
 
           {/* 🔥 Button */}
-          <Button
-            className="w-full"
-            onClick={handleSubmit}
-            disabled={loading}
-          >
+          <Button className="w-full" onClick={handleSubmit} disabled={loading}>
             {loading ? "Adding..." : "Add Expense"}
           </Button>
-
         </CardContent>
       </Card>
-
     </div>
   );
 }
