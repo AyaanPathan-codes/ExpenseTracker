@@ -6,5 +6,6 @@ export const CATEGORIES = [
   "TRAVEL",
   "BILLS",
   "FOOD",
-  "SHOPPING"
+  "SHOPPING",
+  "SAVINGS",
 ];

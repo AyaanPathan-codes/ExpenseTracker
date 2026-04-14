@@ -65,16 +65,12 @@ function Analytics() {
       {/* 🔥 SIDEBAR */}
      <div className="w-64 bg-white dark:bg-[#020617] p-6 shadow-xl border-r border-gray-200 dark:border-gray-800">
         <h2 className="text-xl font-bold mb-6 text-gray-800 dark:text-white">
-          Business
+          Expenzo
         </h2>
 
         <div className="space-y-4">
           <div className="flex items-center gap-2 p-2 bg-gray-200 dark:bg-gray-700 rounded">
             <LayoutDashboard size={18} /> Analytics
-          </div>
-
-          <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
-            <ShoppingCart size={18} /> Products
           </div>
 
           <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
@@ -101,6 +97,13 @@ function Analytics() {
       className="bg-[#6366f1] hover:bg-indigo-600 text-white px-4 py-2 rounded-lg"
     >
       + Add Expense
+    </button>
+
+       <button
+      onClick={() => window.location.href = "/add"}
+      className="bg-[#6366f1] hover:bg-indigo-600 text-white px-4 py-2 rounded-lg"
+    >
+      + Add Savings
     </button>
 
     {/* 🔥 DARK TOGGLE */}
@@ -151,7 +154,7 @@ function Analytics() {
           {/* BAR */}
           <div className="bg-white dark:bg-[#1e293b] p-6 rounded-2xl border border-gray-200 dark:border-gray-800">
             <h3 className="mb-4 text-gray-700 dark:text-white">
-              Sales Dynamics
+              Expense By Date
             </h3>
 
             <BarChart width={400} height={250} data={chartData}>
